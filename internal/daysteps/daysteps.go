@@ -29,7 +29,7 @@ func (ds *DaySteps) Parse(datastring string) (err error) {
 
 	steps, err := strconv.Atoi(stepsNoSpace)
 	if err != nil {
-		return fmt.Errorf("steps format is invalid %v", slice[0])
+		return fmt.Errorf("steps format is invalid: %v, error: %v", slice[0], err)
 	}
 
 	if steps <= 0 {
@@ -40,7 +40,7 @@ func (ds *DaySteps) Parse(datastring string) (err error) {
 
 	duration, err := time.ParseDuration(strings.TrimSpace(slice[1]))
 	if err != nil {
-		return fmt.Errorf("duration format is invalid %v", slice[1])
+		return fmt.Errorf("duration format is invalid %v, error: %w", slice[1], err)
 	}
 
 	if duration <= 0 {
@@ -57,7 +57,7 @@ func (ds DaySteps) ActionInfo() (string, error) {
 
 	calories, err := spentenergy.WalkingSpentCalories(ds.Steps, ds.Weight, ds.Height, ds.Duration)
 	if err != nil {
-		return "", fmt.Errorf("calories calculation failed: %v", err)
+		return "", fmt.Errorf("calories calculation failed: %w", err)
 	}
 
 	message := fmt.Sprintf("Количество шагов: %d.\n"+

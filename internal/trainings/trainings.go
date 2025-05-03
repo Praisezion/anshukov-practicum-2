@@ -24,7 +24,7 @@ func (t *Training) Parse(datastring string) (err error) {
 	}
 	steps, err := strconv.Atoi(slice[0])
 	if err != nil {
-		return fmt.Errorf("wrong steps count input %v", err)
+		return fmt.Errorf("wrong steps count input %w", err)
 	}
 	if steps <= 0 {
 		return fmt.Errorf("steps must be positive")
@@ -35,7 +35,7 @@ func (t *Training) Parse(datastring string) (err error) {
 
 	duration, err := time.ParseDuration(strings.TrimSpace(slice[2]))
 	if err != nil {
-		return fmt.Errorf("wrong duration input %v", err)
+		return fmt.Errorf("wrong duration input %w", err)
 	}
 	if duration <= 0 {
 		return fmt.Errorf("duration must be positive")
@@ -62,7 +62,7 @@ func (t Training) ActionInfo() (string, error) {
 	}
 
 	if err != nil {
-		return "", fmt.Errorf("ошибка расчета калорий: %v", err)
+		return "", fmt.Errorf("ошибка расчета калорий: %w", err)
 	}
 
 	durationHours := t.Duration.Hours()

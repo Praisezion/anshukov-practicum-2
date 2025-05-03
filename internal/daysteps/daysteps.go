@@ -29,7 +29,7 @@ func (ds *DaySteps) Parse(datastring string) (err error) {
 
 	steps, err := strconv.Atoi(stepsNoSpace)
 	if err != nil {
-		return fmt.Errorf("steps format is invalid: %v, error: %v", slice[0], err)
+		return fmt.Errorf("steps format is invalid: %v, error: %w", slice[0], err)
 	}
 
 	if steps <= 0 {
